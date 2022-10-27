@@ -94,7 +94,6 @@ const createUser = async function (req, res) {
         return res.status(201).send({ status: true, message: "successsfully created", data: createUser })
 
     } catch (error) {
-        console.log(error)
         return res.status(500).send({ status: false, message: error.message })
     }
 }
@@ -266,7 +265,7 @@ const updateuser = async (req, res) => {
 
         )
 
-        return res.send({ status: true, message: "updated user successfully", data: updateduser })
+        return res.status(200).send({ status: true, message: "updated user successfully", data: updateduser })
     }
     catch (error) {
         console.log(error)

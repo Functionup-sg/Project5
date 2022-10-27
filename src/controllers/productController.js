@@ -86,7 +86,7 @@ const createProduct = async function (req, res) {
         return res.status(500).send({ status: false, message: error.message })
     }
 }
-
+ 
 
 let getProductByFilter = async (req, res) => {
     try {
@@ -197,7 +197,7 @@ const updateProduct = async function (req, res) {
         if (Object.values(data).includes(currencyFormat)) {
             if (!(currencyFormat).includes("₹")) return res.status(400).send({ status: false, message: "currencyFormat  must be ₹" })
         }
-        console.log("from here", req.files)
+       // console.log("from here", req.files)
 
         //if empty, take profileImage from DB
         if (productImage) {

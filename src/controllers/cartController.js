@@ -54,7 +54,7 @@ const createCart = async (req, res) => {
 
         //product exists in the cart already : increase its quantity
         let updateCart = await cartModel.findOneAndUpdate(
-            //whe $ on 72 and not on 69?
+        
             { _id: findCart._id, "items.productId": productId },
             {
                 $inc: {
@@ -134,10 +134,10 @@ const updateCart = async function (req, res) {
 
         //if product found , access quantity 
         //[0] : why??  , if not : product will get deleted in one go even when the quantity is 3
-        let quantity = findCart.items.filter(x => x.productId.toString() === productId).quantity
+        let quantity = findCart.items.filter(x => x.productId.toString() === productId)[0].quantity
 
 
-        console.log("======>", quantity)
+        //console.log("======>", quantity)
         let product = await productModel.findById(productId)
 
         //if removeProduct == 1
@@ -181,7 +181,7 @@ const updateCart = async function (req, res) {
 
             for (i of productQuantity) {
                 speciPro = i
-                console.log("here", i)
+                //console.log("here", i)
             }
             let obj = { product: product._id, quantity: speciPro.quantity }
 
@@ -219,7 +219,7 @@ let getCart = async function (req, res) {
         //Authorization Check
         if (getCartdetails.userId != req.token.userId) return res.status(403).send({ status: false, message: "Unauthorized User" })
 
-        return res.status(200).send({ status: true, Data: getCartdetails })
+        return res.status(200).send({ status: true,msg: "Success", Data: getCartdetails })
 
     } catch (err) {
         return res.status(500).send({ status: false, Msg: err.message })
